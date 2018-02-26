@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Lykke.Service.Resources.Services</AssemblyName>
+    <RootNamespace>Lykke.Service.Resources.Services</RootNamespace>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lykke.Service.Resources.Core\Lykke.Service.Resources.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Lykke.Common" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Lykke.AzureStorage, Version=6.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\..\Users\Dmitry\.nuget\packages\lykke.azurestorage\6.0.1\lib\netstandard2.0\Lykke.AzureStorage.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
