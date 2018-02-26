@@ -10,10 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Lykke.Common" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Lykke.AzureStorage, Version=6.0.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\..\..\..\..\Users\Dmitry\.nuget\packages\lykke.azurestorage\6.0.1\lib\netstandard2.0\Lykke.AzureStorage.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Lykke.AzureStorage" Version="6.0.1" />
   </ItemGroup>
 </Project>
