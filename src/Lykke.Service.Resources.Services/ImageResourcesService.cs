@@ -40,8 +40,11 @@ namespace Lykke.Service.Resources.Services
 
         public async Task AddAsync(string name, byte[] data)
         {
-            await _blobStorage.SaveBlobAsync(ImageResourcesContainer, name, data);
-            _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(ImageResourcesContainer, name)});
+            if (!await _blobStorage.HasBlobAsync(ImageResourcesContainer, name))
+            {
+                await _blobStorage.SaveBlobAsync(ImageResourcesContainer, name, data);
+                _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(ImageResourcesContainer, name)});
+            }
         }
 
         public async Task DeleteAsync(string name)

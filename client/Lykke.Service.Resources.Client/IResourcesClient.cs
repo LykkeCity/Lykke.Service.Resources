@@ -62,6 +62,14 @@ namespace Lykke.Service.Resources.Client
         Task<IEnumerable<ImageResource>> GetAllImageResourcesAsync();
         
         /// <summary>
+        /// Adds image resource
+        /// </summary>
+        /// <param name="name">name of the resource(filename)</param>
+        /// <param name="data">file content</param>
+        /// <returns></returns>
+        Task AddImageResourceAsync(string name, byte[] data);
+        
+        /// <summary>
         /// Deletes image resource by the name
         /// </summary>
         /// <param name="name">name of the resource(filename)</param>
