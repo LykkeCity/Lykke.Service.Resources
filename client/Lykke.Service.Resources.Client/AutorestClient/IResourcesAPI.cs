@@ -34,6 +34,14 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetAllImageResourcesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
         /// <param name='name'>
         /// </param>
         /// <param name='customHeaders'>
@@ -74,6 +82,14 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetAllTextResourcesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='lang'>
         /// </param>

@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Lykke.Common.ApiLibrary.Extensions;
+using Lykke.Service.Resources.Core.Domain.ImageResources;
 using Lykke.Service.Resources.Core.Services;
 using Lykke.Service.Resources.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,20 @@ namespace Lykke.Service.Resources.Controllers
             )
         {
             _imageResourcesService = imageResourcesService;
+        }
+        
+        [HttpGet]
+        [SwaggerOperation("GetAllImageResources")]
+        [ProducesResponseType(typeof(IEnumerable<ImageResource>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        public IActionResult GetAllResources()
+        {
+            var resource = _imageResourcesService.GetAll();
+            
+            if (resource == null)
+                return NotFound();
+            
+            return Ok(resource);
         }
         
         [HttpGet("{name}")]

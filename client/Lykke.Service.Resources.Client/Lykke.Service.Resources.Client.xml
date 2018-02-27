@@ -23,6 +23,14 @@
             Gets or sets json deserialization settings.
             </summary>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.GetAllImageResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.GetImageResourceWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='name'>
             </param>
@@ -57,6 +65,14 @@
             <summary>
             Checks service is alive
             </summary>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.GetAllTextResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='customHeaders'>
             The headers that will be added to request.
             </param>
@@ -141,6 +157,24 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.ErrorResponse.ModelErrors">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.Models.ImageResource.#ctor">
+            <summary>
+            Initializes a new instance of the ImageResource class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.Models.ImageResource.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the ImageResource class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.ImageResource.Name">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.ImageResource.Url">
             <summary>
             </summary>
         </member>
@@ -332,6 +366,23 @@
             Initializes client properties.
             </summary>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.GetAllImageResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.GetImageResourceWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='name'>
             </param>
@@ -399,6 +450,23 @@
             <summary>
             Checks service is alive
             </summary>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.GetAllTextResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='customHeaders'>
             Headers that will be added to request.
             </param>
@@ -512,6 +580,19 @@
             Extension methods for ResourcesAPI.
             </summary>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllImageResources(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllImageResourcesAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetImageResource(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.String)">
             <param name='operations'>
             The operations group for this extension method.
@@ -575,6 +656,19 @@
             <summary>
             Checks service is alive
             </summary>
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllTextResources(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllTextResourcesAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.Threading.CancellationToken)">
             <param name='operations'>
             The operations group for this extension method.
             </param>
@@ -679,6 +773,12 @@
             <param name="name">part of the resource name (namespace)</param>
             <returns></returns>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.GetAllTextResourcesAsync">
+            <summary>
+            Gets list of all text resources
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.IResourcesClient.AddTextResourceAsync(System.String,System.String,System.String)">
             <summary>
             Adds text resource
@@ -701,6 +801,12 @@
             Gets image resource (link of the blob)
             </summary>
             <param name="name">name of the resource(filename)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.GetAllImageResourcesAsync">
+            <summary>
+            Gets list of all image resources
+            </summary>
             <returns></returns>
         </member>
         <member name="M:Lykke.Service.Resources.Client.IResourcesClient.DeleteImageResourceAsync(System.String)">

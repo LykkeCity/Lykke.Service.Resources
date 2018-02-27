@@ -23,6 +23,20 @@ namespace Lykke.Service.Resources.Controllers
             _textResourcesService = textResourcesService;
         }
         
+        [HttpGet]
+        [SwaggerOperation("GetAllTextResources")]
+        [ProducesResponseType(typeof(IEnumerable<TextResource>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        public IActionResult GetAllResources()
+        {
+            var resource = _textResourcesService.GetAll();
+            
+            if (resource == null)
+                return NotFound();
+            
+            return Ok(resource);
+        }
+        
         [HttpGet("{lang}/{name}")]
         [SwaggerOperation("GetTextResource")]
         [ProducesResponseType(typeof(TextResource), (int)HttpStatusCode.OK)]

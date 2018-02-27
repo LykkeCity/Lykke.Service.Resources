@@ -50,6 +50,18 @@ namespace Lykke.Service.Resources.Client
             return Array.Empty<TextResource>();
         }
 
+        public async Task<IEnumerable<TextResource>> GetAllTextResourcesAsync()
+        {
+            var response = await _service.GetAllTextResourcesAsync();
+
+            if (response is IEnumerable<TextResource> result)
+            {
+                return result;
+            }
+
+            return Array.Empty<TextResource>();
+        }
+
         public async Task AddTextResourceAsync(string lang, string name, string value)
         {
             await _service.AddTextResourceAsync(new TextResourceModel(lang, name, value));
@@ -70,6 +82,18 @@ namespace Lykke.Service.Resources.Client
             }
 
             return null;
+        }
+
+        public async Task<IEnumerable<ImageResource>> GetAllImageResourcesAsync()
+        {
+            var response = await _service.GetAllImageResourcesAsync();
+
+            if (response is IEnumerable<ImageResource> result)
+            {
+                return result;
+            }
+
+            return Array.Empty<ImageResource>();
         }
 
         public async Task AddImageResourceAsync(string name, byte[] data)

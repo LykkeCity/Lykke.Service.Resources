@@ -34,6 +34,19 @@ namespace Lykke.Service.Resources.Services
                 : Array.Empty<ITextResource>();
         }
 
+        public IEnumerable<ITextResource> GetAll()
+        {
+            var result = new List<ITextResource>();
+
+            foreach (var key in _cache.Keys)
+            {
+                if (_cache.TryGetValue(key, out var items))
+                    result.AddRange(items);
+            }
+            
+            return result.OrderBy(item => item.Lang).ThenBy(item => item.Name);
+        }
+
         public async Task LoadAllAsync()
         {
             var resources = await _repository.GetAllAsync();

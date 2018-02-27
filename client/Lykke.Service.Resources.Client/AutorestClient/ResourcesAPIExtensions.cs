@@ -20,6 +20,28 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            public static object GetAllImageResources(this IResourcesAPI operations)
+            {
+                return operations.GetAllImageResourcesAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetAllImageResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllImageResourcesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
             /// <param name='name'>
             /// </param>
             public static object GetImageResource(this IResourcesAPI operations, string name)
@@ -118,6 +140,28 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             public static async Task<object> IsAliveAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.IsAliveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static object GetAllTextResources(this IResourcesAPI operations)
+            {
+                return operations.GetAllTextResourcesAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetAllTextResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllTextResourcesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

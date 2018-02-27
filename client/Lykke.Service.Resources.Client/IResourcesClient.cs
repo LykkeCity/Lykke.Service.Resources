@@ -26,6 +26,12 @@ namespace Lykke.Service.Resources.Client
         Task<IEnumerable<TextResource>> GetTextResourcesAsync(string lang, string name);
         
         /// <summary>
+        /// Gets list of all text resources
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<TextResource>> GetAllTextResourcesAsync();
+        
+        /// <summary>
         /// Adds text resource
         /// </summary>
         /// <param name="lang">language</param>
@@ -48,6 +54,12 @@ namespace Lykke.Service.Resources.Client
         /// <param name="name">name of the resource(filename)</param>
         /// <returns></returns>
         Task<string> GetImageResourceAsync(string name);
+        
+        /// <summary>
+        /// Gets list of all image resources
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<ImageResource>> GetAllImageResourcesAsync();
         
         /// <summary>
         /// Deletes image resource by the name

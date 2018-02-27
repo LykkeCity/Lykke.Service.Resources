@@ -11,7 +11,7 @@ namespace Lykke.Service.Resources.Services
     {
         private readonly IBlobStorage _blobStorage;
         private const string ImageResourcesContainer = "imageresources";
-        private readonly List<IImageResource> _cache = new List<IImageResource>();
+        private readonly List<ImageResource> _cache = new List<ImageResource>();
 
         public ImageResourcesService(IBlobStorage blobStorage)
         {
@@ -21,6 +21,11 @@ namespace Lykke.Service.Resources.Services
         public string Get(string name)
         {
             return _cache.FirstOrDefault(item => item.Name == name)?.Url;
+        }
+
+        public IEnumerable<ImageResource> GetAll()
+        {
+            return _cache.OrderBy(item => item.Name);
         }
 
         public async Task LoadAllAsync()
