@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Common;
 using Lykke.Common.ApiLibrary.Extensions;
 using Lykke.Service.Resources.Core.Domain.ImageResources;
 using Lykke.Service.Resources.Core.Services;
 using Lykke.Service.Resources.Models;
+using Lykke.Service.Resources.Settings.ServiceSettings;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -14,18 +16,21 @@ namespace Lykke.Service.Resources.Controllers
     public class ImageResourcesController : Controller
     {
         private readonly IImageResourcesService _imageResourcesService;
+        private readonly ResourcesSettings _settings;
 
         public ImageResourcesController(
-            IImageResourcesService imageResourcesService
+            IImageResourcesService imageResourcesService,
+            ResourcesSettings settings
             )
         {
             _imageResourcesService = imageResourcesService;
+            _settings = settings;
         }
         
         [HttpGet]
         [SwaggerOperation("GetAllImageResources")]
         [ProducesResponseType(typeof(IEnumerable<ImageResource>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
         public IActionResult GetAllResources()
         {
             var resource = _imageResourcesService.GetAll();
@@ -39,7 +44,7 @@ namespace Lykke.Service.Resources.Controllers
         [HttpGet("{name}")]
         [SwaggerOperation("GetImageResource")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
         public IActionResult GetResource(string name)
         {
             var resource = _imageResourcesService.Get(name);
@@ -52,15 +57,18 @@ namespace Lykke.Service.Resources.Controllers
         
         [HttpPost("add")]
         [SwaggerOperation("AddImageResource")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> AddResource([FromBody]ImageResourceModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessage());
+                return BadRequest(ErrorResponse.Create(ModelState.GetErrorMessage()));
 
             if (model.Data.Length == 0)
-                return BadRequest($"Invalid {nameof(model.Data)} value");
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Data)} value"));
+            
+            if (model.Data.Length > _settings.MaxFileSizeInMb * 1024 * 1024)
+                return BadRequest(ErrorResponse.Create($"File size must be below {_settings.MaxFileSizeInMb} Mb"));
             
             await _imageResourcesService.AddAsync(model.Name, model.Data);
             return Ok();
@@ -68,12 +76,15 @@ namespace Lykke.Service.Resources.Controllers
         
         [HttpPost("delete")]
         [SwaggerOperation("DeleteImageResource")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> DeleteResource(string name)
         {
             if (string.IsNullOrEmpty(name))
-                return BadRequest();
+                return BadRequest(ErrorResponse.Create($"{nameof(name)} can't be empty"));
+            
+            if (!name.IsValidPartitionOrRowKey())
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(name)} value"));
 
             await _imageResourcesService.DeleteAsync(name);
             return Ok();

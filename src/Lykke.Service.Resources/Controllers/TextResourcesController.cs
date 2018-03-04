@@ -26,7 +26,7 @@ namespace Lykke.Service.Resources.Controllers
         [HttpGet]
         [SwaggerOperation("GetAllTextResources")]
         [ProducesResponseType(typeof(IEnumerable<TextResource>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
         public IActionResult GetAllResources()
         {
             var resource = _textResourcesService.GetAll();
@@ -40,7 +40,7 @@ namespace Lykke.Service.Resources.Controllers
         [HttpGet("{lang}/{name}")]
         [SwaggerOperation("GetTextResource")]
         [ProducesResponseType(typeof(TextResource), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
         public IActionResult GetResource(string lang, string name)
         {
             var resource = _textResourcesService.Get(lang, name);
@@ -62,18 +62,18 @@ namespace Lykke.Service.Resources.Controllers
         
         [HttpPost("add")]
         [SwaggerOperation("AddTextResource")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> AddResource([FromBody]TextResourceModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessage());
+                return BadRequest(ErrorResponse.Create(ModelState.GetErrorMessage()));
 
             if (!model.Lang.IsValidPartitionOrRowKey())
-                return BadRequest($"Invalid {nameof(model.Lang)} value");
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Lang)} value"));
             
             if (!model.Name.IsValidPartitionOrRowKey())
-                return BadRequest($"Invalid {nameof(model.Name)} value");
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
             
             await _textResourcesService.AddAsync(model.Lang, model.Name, model.Value);
             return Ok();
@@ -81,18 +81,18 @@ namespace Lykke.Service.Resources.Controllers
         
         [HttpPost("delete")]
         [SwaggerOperation("DeleteTextResource")]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(int), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> DeleteResource([FromBody]DeleteTextResourceModel model)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState.GetErrorMessage());
+                return BadRequest(ErrorResponse.Create(ModelState.GetErrorMessage()));
 
             if (!model.Lang.IsValidPartitionOrRowKey())
-                return BadRequest($"Invalid {nameof(model.Lang)} value");
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Lang)} value"));
             
             if (!model.Name.IsValidPartitionOrRowKey())
-                return BadRequest($"Invalid {nameof(model.Name)} value");
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
             
             await _textResourcesService.DeleteAsync(model.Lang, model.Name);
             return Ok();

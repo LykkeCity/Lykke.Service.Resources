@@ -20,7 +20,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static object GetAllImageResources(this IResourcesAPI operations)
+            public static IList<ImageResource> GetAllImageResources(this IResourcesAPI operations)
             {
                 return operations.GetAllImageResourcesAsync().GetAwaiter().GetResult();
             }
@@ -31,7 +31,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetAllImageResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<ImageResource>> GetAllImageResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetAllImageResourcesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -44,7 +44,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static object GetImageResource(this IResourcesAPI operations, string name)
+            public static string GetImageResource(this IResourcesAPI operations, string name)
             {
                 return operations.GetImageResourceAsync(name).GetAwaiter().GetResult();
             }
@@ -57,7 +57,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetImageResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetImageResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetImageResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,7 +70,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='model'>
             /// </param>
-            public static int? AddImageResource(this IResourcesAPI operations, ImageResourceModel model = default(ImageResourceModel))
+            public static ErrorResponse AddImageResource(this IResourcesAPI operations, ImageResourceModel model = default(ImageResourceModel))
             {
                 return operations.AddImageResourceAsync(model).GetAwaiter().GetResult();
             }
@@ -83,7 +83,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> AddImageResourceAsync(this IResourcesAPI operations, ImageResourceModel model = default(ImageResourceModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> AddImageResourceAsync(this IResourcesAPI operations, ImageResourceModel model = default(ImageResourceModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.AddImageResourceWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -96,7 +96,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static int? DeleteImageResource(this IResourcesAPI operations, string name = default(string))
+            public static ErrorResponse DeleteImageResource(this IResourcesAPI operations, string name = default(string))
             {
                 return operations.DeleteImageResourceAsync(name).GetAwaiter().GetResult();
             }
@@ -109,7 +109,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> DeleteImageResourceAsync(this IResourcesAPI operations, string name = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> DeleteImageResourceAsync(this IResourcesAPI operations, string name = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteImageResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -148,7 +148,104 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static object GetAllTextResources(this IResourcesAPI operations)
+            public static IList<Language> GetAllLanguages(this IResourcesAPI operations)
+            {
+                return operations.GetAllLanguagesAsync().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<Language>> GetAllLanguagesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllLanguagesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            public static ErrorResponse AddLanguage(this IResourcesAPI operations, Language model = default(Language))
+            {
+                return operations.AddLanguageAsync(model).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> AddLanguageAsync(this IResourcesAPI operations, Language model = default(Language), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddLanguageWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='code'>
+            /// </param>
+            public static ErrorResponse DeleteLanguage(this IResourcesAPI operations, string code = default(string))
+            {
+                return operations.DeleteLanguageAsync(code).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='code'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> DeleteLanguageAsync(this IResourcesAPI operations, string code = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteLanguageWithHttpMessagesAsync(code, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='code'>
+            /// </param>
+            public static void ApiLanguagesTestPost(this IResourcesAPI operations, string code = default(string))
+            {
+                operations.ApiLanguagesTestPostAsync(code).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='code'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ApiLanguagesTestPostAsync(this IResourcesAPI operations, string code = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.ApiLanguagesTestPostWithHttpMessagesAsync(code, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<TextResource> GetAllTextResources(this IResourcesAPI operations)
             {
                 return operations.GetAllTextResourcesAsync().GetAwaiter().GetResult();
             }
@@ -159,7 +256,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetAllTextResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<TextResource>> GetAllTextResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetAllTextResourcesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -174,7 +271,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static object GetTextResource(this IResourcesAPI operations, string lang, string name)
+            public static TextResource GetTextResource(this IResourcesAPI operations, string lang, string name)
             {
                 return operations.GetTextResourceAsync(lang, name).GetAwaiter().GetResult();
             }
@@ -189,7 +286,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> GetTextResourceAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<TextResource> GetTextResourceAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetTextResourceWithHttpMessagesAsync(lang, name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -232,7 +329,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='model'>
             /// </param>
-            public static int? AddTextResource(this IResourcesAPI operations, TextResourceModel model = default(TextResourceModel))
+            public static ErrorResponse AddTextResource(this IResourcesAPI operations, TextResourceModel model = default(TextResourceModel))
             {
                 return operations.AddTextResourceAsync(model).GetAwaiter().GetResult();
             }
@@ -245,7 +342,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> AddTextResourceAsync(this IResourcesAPI operations, TextResourceModel model = default(TextResourceModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> AddTextResourceAsync(this IResourcesAPI operations, TextResourceModel model = default(TextResourceModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.AddTextResourceWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -258,7 +355,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='model'>
             /// </param>
-            public static int? DeleteTextResource(this IResourcesAPI operations, DeleteTextResourceModel model = default(DeleteTextResourceModel))
+            public static ErrorResponse DeleteTextResource(this IResourcesAPI operations, DeleteTextResourceModel model = default(DeleteTextResourceModel))
             {
                 return operations.DeleteTextResourceAsync(model).GetAwaiter().GetResult();
             }
@@ -271,7 +368,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> DeleteTextResourceAsync(this IResourcesAPI operations, DeleteTextResourceModel model = default(DeleteTextResourceModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> DeleteTextResourceAsync(this IResourcesAPI operations, DeleteTextResourceModel model = default(DeleteTextResourceModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteTextResourceWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
                 {

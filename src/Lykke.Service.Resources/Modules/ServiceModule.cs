@@ -2,7 +2,9 @@
 using AzureStorage.Blob;
 using AzureStorage.Tables;
 using Common.Log;
+using Lykke.Service.Resources.AzureRepositories.Languages;
 using Lykke.Service.Resources.AzureRepositories.TextResources;
+using Lykke.Service.Resources.Core.Domain.Languages;
 using Lykke.Service.Resources.Core.Domain.TextResources;
 using Lykke.Service.Resources.Core.Services;
 using Lykke.Service.Resources.Settings.ServiceSettings;
@@ -27,6 +29,9 @@ namespace Lykke.Service.Resources.Modules
             builder.RegisterInstance(_log)
                 .As<ILog>()
                 .SingleInstance();
+            
+            builder.RegisterInstance(_settings.CurrentValue)
+                .SingleInstance();
 
             builder.RegisterType<HealthService>()
                 .As<IHealthService>()
@@ -43,6 +48,11 @@ namespace Lykke.Service.Resources.Modules
             builder.RegisterInstance<ITextResourceRepository>(
                 new TextResourcesRepository(AzureTableStorage<TextResourceEntity>.Create(
                     _settings.ConnectionString(x => x.Db.DataConnString), "TextResources", _log))
+            ).SingleInstance();
+            
+            builder.RegisterInstance<ILanguagesRepository>(
+                new LanguagesRepository(AzureTableStorage<LanguageEntity>.Create(
+                    _settings.ConnectionString(x => x.Db.DataConnString), "ResourceLanguages", _log))
             ).SingleInstance();
 
             builder.RegisterType<TextResourcesService>()

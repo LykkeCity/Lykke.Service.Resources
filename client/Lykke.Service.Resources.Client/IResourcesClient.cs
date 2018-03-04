@@ -75,5 +75,27 @@ namespace Lykke.Service.Resources.Client
         /// <param name="name">name of the resource(filename)</param>
         /// <returns></returns>
         Task DeleteImageResourceAsync(string name);
+        
+        
+        /// <summary>
+        /// Gets list of all languages
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<Language>> GetAllLanguagesAsync();
+        
+        /// <summary>
+        /// Adds a language
+        /// </summary>
+        /// <param name="code">code of the language (i.e. en)</param>
+        /// <param name="name">name of the language (i.e. English)</param>
+        /// <returns></returns>
+        Task AddLanguageAsync(string code, string name);
+        
+        /// <summary>
+        /// Deletes language by the code
+        /// </summary>
+        /// <param name="code">code of the language (i.e en)</param>
+        /// <returns></returns>
+        Task DeleteLanguageAsync(string code);
     }
 }

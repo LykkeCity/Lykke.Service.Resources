@@ -72,6 +72,44 @@
             The cancellation token.
             </param>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.GetAllLanguagesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.AddLanguageWithHttpMessagesAsync(Lykke.Service.Resources.Client.AutorestClient.Models.Language,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='model'>
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.DeleteLanguageWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='code'>
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.ApiLanguagesTestPostWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='code'>
+            </param>
+            <param name='customHeaders'>
+            The headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI.GetAllTextResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='customHeaders'>
             The headers that will be added to request.
@@ -249,6 +287,24 @@
             </summary>
         </member>
         <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.IssueIndicator.Value">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.Models.Language.#ctor">
+            <summary>
+            Initializes a new instance of the Language class.
+            </summary>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.Models.Language.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the Language class.
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.Language.Code">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Lykke.Service.Resources.Client.AutorestClient.Models.Language.Name">
             <summary>
             </summary>
         </member>
@@ -466,6 +522,77 @@
             A response object containing the response body and response headers.
             </return>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.GetAllLanguagesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.AddLanguageWithHttpMessagesAsync(Lykke.Service.Resources.Client.AutorestClient.Models.Language,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='model'>
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.DeleteLanguageWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='code'>
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <exception cref="T:Microsoft.Rest.SerializationException">
+            Thrown when unable to deserialize the response
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.ApiLanguagesTestPostWithHttpMessagesAsync(System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <param name='code'>
+            </param>
+            <param name='customHeaders'>
+            Headers that will be added to request.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+            <exception cref="T:Microsoft.Rest.HttpOperationException">
+            Thrown when the operation returned an invalid status code
+            </exception>
+            <return>
+            A response object containing the response body and response headers.
+            </return>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPI.GetAllTextResourcesWithHttpMessagesAsync(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
             <param name='customHeaders'>
             Headers that will be added to request.
@@ -663,6 +790,70 @@
             The cancellation token.
             </param>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllLanguages(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllLanguagesAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.AddLanguage(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,Lykke.Service.Resources.Client.AutorestClient.Models.Language)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='model'>
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.AddLanguageAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,Lykke.Service.Resources.Client.AutorestClient.Models.Language,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='model'>
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.DeleteLanguage(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.String)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='code'>
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.DeleteLanguageAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.String,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='code'>
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.ApiLanguagesTestPost(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.String)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='code'>
+            </param>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.ApiLanguagesTestPostAsync(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI,System.String,System.Threading.CancellationToken)">
+            <param name='operations'>
+            The operations group for this extension method.
+            </param>
+            <param name='code'>
+            </param>
+            <param name='cancellationToken'>
+            The cancellation token.
+            </param>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.AutorestClient.ResourcesAPIExtensions.GetAllTextResources(Lykke.Service.Resources.Client.AutorestClient.IResourcesAPI)">
             <param name='operations'>
             The operations group for this extension method.
@@ -809,11 +1000,40 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.AddImageResourceAsync(System.String,System.Byte[])">
+            <summary>
+            Adds image resource
+            </summary>
+            <param name="name">name of the resource(filename)</param>
+            <param name="data">file content</param>
+            <returns></returns>
+        </member>
         <member name="M:Lykke.Service.Resources.Client.IResourcesClient.DeleteImageResourceAsync(System.String)">
             <summary>
             Deletes image resource by the name
             </summary>
             <param name="name">name of the resource(filename)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.GetAllLanguagesAsync">
+            <summary>
+            Gets list of all languages
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.AddLanguageAsync(System.String,System.String)">
+            <summary>
+            Adds a language
+            </summary>
+            <param name="code">code of the language (i.e. en)</param>
+            <param name="name">name of the language (i.e. English)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Lykke.Service.Resources.Client.IResourcesClient.DeleteLanguageAsync(System.String)">
+            <summary>
+            Deletes language by the code
+            </summary>
+            <param name="code">code of the language (i.e en)</param>
             <returns></returns>
         </member>
     </members>

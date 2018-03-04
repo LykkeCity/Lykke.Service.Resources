@@ -28,82 +28,80 @@ namespace Lykke.Service.Resources.Client
 
         public async Task<TextResource> GetTextResourceAsync(string lang, string name)
         {
-            var response = await _service.GetTextResourceAsync(lang, name);
-
-            if (response is TextResource result)
-            {
-                return result;
-            }
-
-            return null;
+            return await _service.GetTextResourceAsync(lang, name);
         }
 
         public async Task<IEnumerable<TextResource>> GetTextResourcesAsync(string lang, string name)
         {
-            var response = await _service.GetTextResourcesAsync(lang, name);
-
-            if (response is IEnumerable<TextResource> result)
-            {
-                return result;
-            }
-
-            return Array.Empty<TextResource>();
+            return await _service.GetTextResourcesAsync(lang, name);
         }
 
         public async Task<IEnumerable<TextResource>> GetAllTextResourcesAsync()
         {
-            var response = await _service.GetAllTextResourcesAsync();
-
-            if (response is IEnumerable<TextResource> result)
-            {
-                return result;
-            }
-
-            return Array.Empty<TextResource>();
+            return await _service.GetAllTextResourcesAsync();
         }
 
         public async Task AddTextResourceAsync(string lang, string name, string value)
         {
-            await _service.AddTextResourceAsync(new TextResourceModel(lang, name, value));
+            var response = await _service.AddTextResourceAsync(new TextResourceModel(lang, name, value));
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
         }
 
         public async Task DeleteTextResourceAsync(string lang, string name)
         {
-            await _service.DeleteTextResourceAsync(new DeleteTextResourceModel(lang, name));
+            var response = await _service.DeleteTextResourceAsync(new DeleteTextResourceModel(lang, name));
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
         }
 
         public async Task<string> GetImageResourceAsync(string name)
         {
-            var response = await _service.GetImageResourceAsync(name);
-
-            if (response is string result)
-            {
-                return result;
-            }
-
-            return null;
+            return await _service.GetImageResourceAsync(name);
         }
 
         public async Task<IEnumerable<ImageResource>> GetAllImageResourcesAsync()
         {
-            var response = await _service.GetAllImageResourcesAsync();
-
-            if (response is IEnumerable<ImageResource> result)
-            {
-                return result;
-            }
-
-            return Array.Empty<ImageResource>();
+            return await _service.GetAllImageResourcesAsync();
         }
 
         public async Task AddImageResourceAsync(string name, byte[] data)
         {
-            await _service.AddImageResourceAsync(new ImageResourceModel(name, data));
+            var response = await _service.AddImageResourceAsync(new ImageResourceModel(name, data));
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
         }
 
         public async Task DeleteImageResourceAsync(string name)
         {
-            await _service.DeleteImageResourceAsync(name);
+            var response = await _service.DeleteImageResourceAsync(name);
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        public async Task<IEnumerable<Language>> GetAllLanguagesAsync()
+        {
+            return await _service.GetAllLanguagesAsync();
+        }
+
+        public async Task AddLanguageAsync(string code, string name)
+        {
+            var response = await _service.AddLanguageAsync(new Language(code, name));
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        public async Task DeleteLanguageAsync(string code)
+        {
+            var response = await _service.DeleteLanguageAsync(code);
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
         }
     }
 }
