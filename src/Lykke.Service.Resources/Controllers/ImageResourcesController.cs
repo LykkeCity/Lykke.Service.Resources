@@ -69,6 +69,9 @@ namespace Lykke.Service.Resources.Controllers
             
             if (model.Data.Length > _settings.MaxFileSizeInMb * 1024 * 1024)
                 return BadRequest(ErrorResponse.Create($"File size must be below {_settings.MaxFileSizeInMb} Mb"));
+
+            if (await _imageResourcesService.IsFileExistsAsync(model.Name))
+                return BadRequest(ErrorResponse.Create($"File with name {model.Name} already exists"));
             
             await _imageResourcesService.AddAsync(model.Name, model.Data);
             return Ok();

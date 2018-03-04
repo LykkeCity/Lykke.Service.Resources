@@ -60,7 +60,7 @@ namespace Lykke.Service.Resources.Modules
                 .SingleInstance();
 
             builder.RegisterInstance<IImageResourcesService>(
-                new ImageResourcesService(AzureBlobStorage.Create(_settings.ConnectionString(x => x.Db.DataConnString)))
+                new ImageResourcesService(AzureBlobStorage.Create(_settings.ConnectionString(x => x.Db.DataConnString)), _settings.CurrentValue.ImagesContainer)
             ).SingleInstance();
         }
     }

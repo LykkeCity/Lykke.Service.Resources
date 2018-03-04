@@ -10,12 +10,16 @@ namespace Lykke.Service.Resources.Services
     public class ImageResourcesService : IImageResourcesService
     {
         private readonly IBlobStorage _blobStorage;
-        private const string ImageResourcesContainer = "imageresources";
+        private readonly string _imageResourceContainer;
         private readonly List<ImageResource> _cache = new List<ImageResource>();
 
-        public ImageResourcesService(IBlobStorage blobStorage)
+        public ImageResourcesService(
+            IBlobStorage blobStorage,
+            string imageResourceContainer
+            )
         {
             _blobStorage = blobStorage;
+            _imageResourceContainer = imageResourceContainer;
         }
         
         public string Get(string name)
@@ -30,27 +34,32 @@ namespace Lykke.Service.Resources.Services
 
         public async Task LoadAllAsync()
         {
-            var names = await _blobStorage.GetListOfBlobKeysAsync(ImageResourcesContainer);
+            var names = await _blobStorage.GetListOfBlobKeysAsync(_imageResourceContainer);
             
             foreach (var name in names)
             {
-                _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(ImageResourcesContainer, name)});
+                _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(_imageResourceContainer, name)});
             }
         }
 
         public async Task AddAsync(string name, byte[] data)
         {
-            if (!await _blobStorage.HasBlobAsync(ImageResourcesContainer, name))
+            if (!await _blobStorage.HasBlobAsync(_imageResourceContainer, name))
             {
-                await _blobStorage.SaveBlobAsync(ImageResourcesContainer, name, data);
-                _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(ImageResourcesContainer, name)});
+                await _blobStorage.SaveBlobAsync(_imageResourceContainer, name, data);
+                _cache.Add(new ImageResource{Name = name, Url = _blobStorage.GetBlobUrl(_imageResourceContainer, name)});
             }
+        }
+
+        public async Task<bool> IsFileExistsAsync(string name)
+        {
+            return await _blobStorage.HasBlobAsync(_imageResourceContainer, name);
         }
 
         public async Task DeleteAsync(string name)
         {
-            if (await _blobStorage.HasBlobAsync(ImageResourcesContainer, name))
-                await _blobStorage.DelBlobAsync(ImageResourcesContainer, name);
+            if (await _blobStorage.HasBlobAsync(_imageResourceContainer, name))
+                await _blobStorage.DelBlobAsync(_imageResourceContainer, name);
             
             var image = _cache.FirstOrDefault(item => item.Name == name);
 

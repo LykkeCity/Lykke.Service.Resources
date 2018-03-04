@@ -10,6 +10,7 @@ namespace Lykke.Service.Resources.Core.Services
         IEnumerable<ImageResource> GetAll();
         Task LoadAllAsync();
         Task AddAsync(string name, byte[] data);
+        Task<bool> IsFileExistsAsync(string name);
         Task DeleteAsync(string name);
     }
 }
