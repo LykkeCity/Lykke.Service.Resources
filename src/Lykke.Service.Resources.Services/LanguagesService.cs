@@ -9,13 +9,16 @@ namespace Lykke.Service.Resources.Services
     public class LanguagesService : ILanguagesService
     {
         private readonly ILanguagesRepository _repository;
+        private readonly ITextResourcesService _textResourcesService;
         private readonly List<ILanguage> _cache = new List<ILanguage>();
 
         public LanguagesService(
-            ILanguagesRepository repository
+            ILanguagesRepository repository,
+            ITextResourcesService textResourcesService
             )
         {
             _repository = repository;
+            _textResourcesService = textResourcesService;
         }
         
         public ILanguage Get(string code)
@@ -48,6 +51,13 @@ namespace Lykke.Service.Resources.Services
 
             if (language != null)
                 _cache.Remove(language);
+
+            var resources = _textResourcesService.GetAll().Where(item => item.Lang == code);
+            
+            foreach (var resource in resources)
+            {
+                await _textResourcesService.DeleteAsync(resource.Lang, resource.Name);
+            }
         }
     }
 }
