@@ -11,7 +11,7 @@ namespace Lykke.Service.Resources.Services
     public class TextResourcesService : ITextResourcesService
     {
         private readonly ITextResourceRepository _repository;
-        private ConcurrentDictionary<string, List<ITextResource>> _cache;
+        private ConcurrentDictionary<string, List<ITextResource>> _cache = new ConcurrentDictionary<string, List<ITextResource>>();
 
         public TextResourcesService(
             ITextResourceRepository repository

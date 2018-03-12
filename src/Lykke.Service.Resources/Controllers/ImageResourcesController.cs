@@ -77,7 +77,7 @@ namespace Lykke.Service.Resources.Controllers
             return Ok();
         }
         
-        [HttpPost("delete")]
+        [HttpPost("delete/{name}")]
         [SwaggerOperation("DeleteImageResource")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
@@ -88,6 +88,11 @@ namespace Lykke.Service.Resources.Controllers
             
             if (!name.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(name)} value"));
+            
+            var res = _imageResourcesService.Get(name);
+
+            if (res == null)
+                return BadRequest($"Image resource with name '{name}' not found");
 
             await _imageResourcesService.DeleteAsync(name);
             return Ok();

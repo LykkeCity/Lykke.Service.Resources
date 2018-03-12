@@ -19,9 +19,11 @@ namespace Lykke.Service.Resources.AzureRepositories.Languages
             return await _tableStorage.GetDataAsync(LanguageEntity.GeneratePartitionKey());
         }
 
-        public async Task AddAsync(string code, string name)
+        public async Task<ILanguage> AddAsync(string code, string name)
         {
-            await _tableStorage.InsertOrMergeAsync(LanguageEntity.Create(code, name));
+            var entity = LanguageEntity.Create(code, name);
+            await _tableStorage.InsertOrMergeAsync(entity);
+            return entity;
         }
 
         public async Task DeleteAsync(string code)

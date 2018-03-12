@@ -6,6 +6,7 @@ namespace Lykke.Service.Resources.Models
     {
         [Required]
         public string Name { get; set; }
+        [Required]
         public byte[] Data { get; set; }
     }
 }

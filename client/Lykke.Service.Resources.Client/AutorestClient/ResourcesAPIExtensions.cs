@@ -96,7 +96,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='name'>
             /// </param>
-            public static ErrorResponse DeleteImageResource(this IResourcesAPI operations, string name = default(string))
+            public static ErrorResponse DeleteImageResource(this IResourcesAPI operations, string name)
             {
                 return operations.DeleteImageResourceAsync(name).GetAwaiter().GetResult();
             }
@@ -109,7 +109,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> DeleteImageResourceAsync(this IResourcesAPI operations, string name = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> DeleteImageResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteImageResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -198,7 +198,7 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// </param>
             /// <param name='code'>
             /// </param>
-            public static ErrorResponse DeleteLanguage(this IResourcesAPI operations, string code = default(string))
+            public static ErrorResponse DeleteLanguage(this IResourcesAPI operations, string code)
             {
                 return operations.DeleteLanguageAsync(code).GetAwaiter().GetResult();
             }
@@ -211,35 +211,12 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ErrorResponse> DeleteLanguageAsync(this IResourcesAPI operations, string code = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ErrorResponse> DeleteLanguageAsync(this IResourcesAPI operations, string code, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteLanguageWithHttpMessagesAsync(code, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='code'>
-            /// </param>
-            public static void ApiLanguagesTestPost(this IResourcesAPI operations, string code = default(string))
-            {
-                operations.ApiLanguagesTestPostAsync(code).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='code'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task ApiLanguagesTestPostAsync(this IResourcesAPI operations, string code = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.ApiLanguagesTestPostWithHttpMessagesAsync(code, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>

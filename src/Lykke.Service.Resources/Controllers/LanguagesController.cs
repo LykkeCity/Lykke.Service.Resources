@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Common;
 using Lykke.Common.ApiLibrary.Extensions;
-using Lykke.Service.Resources.Core.Domain.Languages;
+using Lykke.Service.Resources.Core.Services;
 using Lykke.Service.Resources.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -13,22 +13,22 @@ namespace Lykke.Service.Resources.Controllers
     [Route("api/[controller]")]
     public class LanguagesController : Controller
     {
-        private readonly ILanguagesRepository _repository;
+        private readonly ILanguagesService _service;
 
         public LanguagesController(
-            ILanguagesRepository repository
+            ILanguagesService languagesService
             )
         {
-            _repository = repository;
+            _service = languagesService;
         }
         
         [HttpGet]
         [SwaggerOperation("GetAllLanguages")]
         [ProducesResponseType(typeof(IEnumerable<Language>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetAllLanguages()
+        public IActionResult GetAllLanguages()
         {
-            var languages = await _repository.GetAllAsync();
+            var languages = _service.GetAll();
             
             if (languages == null)
                 return NotFound();
@@ -51,11 +51,11 @@ namespace Lykke.Service.Resources.Controllers
             if (!model.Name.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
             
-            await _repository.AddAsync(model.Code, model.Name);
+            await _service.AddAsync(model.Code, model.Name);
             return Ok();
         }
         
-        [HttpPost("delete")]
+        [HttpPost("delete/{code}")]
         [SwaggerOperation("DeleteLanguage")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
@@ -67,7 +67,12 @@ namespace Lykke.Service.Resources.Controllers
             if (!code.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(code)} value"));
 
-            await _repository.DeleteAsync(code);
+            var language = _service.Get(code);
+
+            if (language == null)
+                return BadRequest(ErrorResponse.Create($"Language with code '{code}' not found"));
+            
+            await _service.DeleteAsync(code);
             return Ok();
         }
     }

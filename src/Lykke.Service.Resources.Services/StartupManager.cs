@@ -15,15 +15,18 @@ namespace Lykke.Service.Resources.Services
     {
         private readonly ITextResourcesService _textResourcesService;
         private readonly IImageResourcesService _imageResourcesService;
+        private readonly ILanguagesService _languagesService;
         private readonly ILog _log;
 
         public StartupManager(
             ITextResourcesService textResourcesService,
             IImageResourcesService imageResourcesService,
+            ILanguagesService languagesService,
             ILog log)
         {
             _textResourcesService = textResourcesService;
             _imageResourcesService = imageResourcesService;
+            _languagesService = languagesService;
             _log = log;
         }
 
@@ -36,6 +39,10 @@ namespace Lykke.Service.Resources.Services
             _log.WriteInfo(nameof(StartAsync), null, "Filling image resources cache...");
             await _imageResourcesService.LoadAllAsync();
             _log.WriteInfo(nameof(StartAsync), null, "Image resources cache is initialized");
+            
+            _log.WriteInfo(nameof(StartAsync), null, "Filling languages cache...");
+            await _languagesService.LoadAllAsync();
+            _log.WriteInfo(nameof(StartAsync), null, "Languages cache is initialized");
         }
     }
 }

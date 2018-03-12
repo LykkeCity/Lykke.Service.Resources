@@ -15,12 +15,15 @@ namespace Lykke.Service.Resources.Controllers
     public class TextResourcesController : Controller
     {
         private readonly ITextResourcesService _textResourcesService;
+        private readonly ILanguagesService _languagesService;
 
         public TextResourcesController(
-            ITextResourcesService textResourcesService
+            ITextResourcesService textResourcesService,
+            ILanguagesService languagesService
             )
         {
             _textResourcesService = textResourcesService;
+            _languagesService = languagesService;
         }
         
         [HttpGet]
@@ -74,6 +77,11 @@ namespace Lykke.Service.Resources.Controllers
             
             if (!model.Name.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
+
+            var language = _languagesService.Get(model.Lang);
+
+            if (language == null)
+                return BadRequest(ErrorResponse.Create($"Language with code '{model.Lang}' not found"));
             
             await _textResourcesService.AddAsync(model.Lang, model.Name, model.Value);
             return Ok();
@@ -93,6 +101,11 @@ namespace Lykke.Service.Resources.Controllers
             
             if (!model.Name.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
+
+            var res = _textResourcesService.Get(model.Lang, model.Name);
+
+            if (res == null)
+                return BadRequest($"Text resource with language '{model.Lang}' and name '{model.Name}' not found");
             
             await _textResourcesService.DeleteAsync(model.Lang, model.Name);
             return Ok();
