@@ -59,7 +59,7 @@ namespace Lykke.Service.Resources.Controllers
         [ProducesResponseType(typeof(IEnumerable<TextResource>), (int)HttpStatusCode.OK)]
         public IActionResult GetAll(string lang, string name)
         {
-            var resources = _textResourcesService.GetAll(lang, name);
+            var resources = _textResourcesService.GetSection(lang, name);
             return Ok(resources);
         }
         

@@ -11,6 +11,7 @@ namespace Lykke.Service.Resources.Services
     public class TextResourcesService : ITextResourcesService
     {
         private readonly ITextResourceRepository _repository;
+        private const string SectionDelimiter = ".";
         private ConcurrentDictionary<string, List<ITextResource>> _cache = new ConcurrentDictionary<string, List<ITextResource>>();
 
         public TextResourcesService(
@@ -27,10 +28,12 @@ namespace Lykke.Service.Resources.Services
                 : null;
         }
 
-        public IEnumerable<ITextResource> GetAll(string lang, string name)
+        public IEnumerable<ITextResource> GetSection(string lang, string sectionName)
         {
+            var prefix = string.IsNullOrEmpty(sectionName) ? "" : sectionName + SectionDelimiter;
+
             return _cache.TryGetValue(lang, out var items) 
-                ? items.Where(item => item.Name.StartsWith(name)) 
+                ? items.Where(item => item.Name.StartsWith(prefix)) 
                 : Array.Empty<ITextResource>();
         }
 

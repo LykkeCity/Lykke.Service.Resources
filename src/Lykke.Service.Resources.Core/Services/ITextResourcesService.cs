@@ -7,7 +7,7 @@ namespace Lykke.Service.Resources.Core.Services
     public interface ITextResourcesService
     {
         ITextResource Get(string lang, string name);
-        IEnumerable<ITextResource> GetAll(string lang, string name);
+        IEnumerable<ITextResource> GetSection(string lang, string sectionName);
         IEnumerable<ITextResource> GetAll();
         Task LoadAllAsync();
         Task AddAsync(string lang, string name, string value);
