@@ -52,7 +52,7 @@ namespace Lykke.Service.Resources.Controllers
             if (resource == null)
                 return NotFound();
             
-            return Ok(resource);
+            return Json(resource);
         }
         
         [HttpPost("add")]
