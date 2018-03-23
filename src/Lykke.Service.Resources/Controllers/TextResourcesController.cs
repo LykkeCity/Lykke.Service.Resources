@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Common;
@@ -11,7 +12,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.Resources.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/textresources")]
     public class TextResourcesController : Controller
     {
         private readonly ITextResourcesService _textResourcesService;
@@ -26,6 +27,10 @@ namespace Lykke.Service.Resources.Controllers
             _languagesService = languagesService;
         }
         
+        /// <summary>
+        /// Gets all text resources
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [SwaggerOperation("GetAllTextResources")]
         [ProducesResponseType(typeof(IEnumerable<TextResource>), (int)HttpStatusCode.OK)]
@@ -40,12 +45,30 @@ namespace Lykke.Service.Resources.Controllers
             return Ok(resource);
         }
         
-        [HttpGet("{lang}/{name}")]
+        /// <summary>
+        /// Gets text resource by language and name
+        /// </summary>
+        /// <param name="lang">languages</param>
+        /// <param name="name">full name of the resource</param>
+        /// <returns></returns>
+        [HttpGet("{lang}/{name}/resource")]
         [SwaggerOperation("GetTextResource")]
         [ProducesResponseType(typeof(TextResource), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
         public IActionResult GetResource(string lang, string name)
         {
+            if (!lang.IsValidPartitionOrRowKey())
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(lang)} value"));
+            
+            if (!name.IsValidPartitionOrRowKey())
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(name)} value"));
+
+            var language = _languagesService.Get(lang);
+
+            if (language == null)
+                return BadRequest(ErrorResponse.Create($"Language with code '{lang}' not found"));
+            
             var resource = _textResourcesService.Get(lang, name);
             
             if (resource == null)
@@ -54,16 +77,45 @@ namespace Lykke.Service.Resources.Controllers
             return Ok(resource);
         }
         
-        [HttpGet("all/{lang}/{name}")]
-        [SwaggerOperation("GetTextResources")]
+        /// <summary>
+        /// Gets section of text resources
+        /// </summary>
+        /// <remarks>Returns text resources in the specified section, for example: lykke.ios will return all text resources under this section (lykke.ios.text, lykke.ios.title etc.)</remarks>
+        /// <param name="lang">language</param>
+        /// <param name="name">full name of the section</param>
+        /// <returns></returns>
+        [HttpGet("{lang}/{name}/section")]
+        [SwaggerOperation("GetTextResourceSection")]
         [ProducesResponseType(typeof(IEnumerable<TextResource>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAll(string lang, string name)
+        [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.NotFound)]
+        public IActionResult GetTextResourceSection(string lang, string name)
         {
-            var resources = _textResourcesService.GetSection(lang, name);
+            if (!lang.IsValidPartitionOrRowKey())
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(lang)} value"));
+            
+            if (!name.IsValidPartitionOrRowKey())
+                return BadRequest(ErrorResponse.Create($"Invalid {nameof(name)} value"));
+
+            var language = _languagesService.Get(lang);
+
+            if (language == null)
+                return BadRequest(ErrorResponse.Create($"Language with code '{lang}' not found"));
+            
+            var resources = _textResourcesService.GetSection(lang, name).ToList();
+
+            if (resources.Count == 0)
+                return NotFound();
+            
             return Ok(resources);
         }
         
-        [HttpPost("add")]
+        /// <summary>
+        /// Adds text resource
+        /// </summary>
+        /// <param name="model">text resource model</param>
+        /// <returns></returns>
+        [HttpPost]
         [SwaggerOperation("AddTextResource")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
@@ -87,7 +139,12 @@ namespace Lykke.Service.Resources.Controllers
             return Ok();
         }
         
-        [HttpPost("delete")]
+        /// <summary>
+        /// Deletes text reosource
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpDelete]
         [SwaggerOperation("DeleteTextResource")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]

@@ -30,7 +30,9 @@ namespace Lykke.Service.Resources.Services
 
         public IEnumerable<ITextResource> GetSection(string lang, string sectionName)
         {
-            var prefix = string.IsNullOrEmpty(sectionName) ? "" : sectionName + SectionDelimiter;
+            var prefix = string.IsNullOrEmpty(sectionName) 
+                ? string.Empty 
+                : sectionName.TrimEnd('.') + SectionDelimiter;
 
             return _cache.TryGetValue(lang, out var items) 
                 ? items.Where(item => item.Name.StartsWith(prefix)) 

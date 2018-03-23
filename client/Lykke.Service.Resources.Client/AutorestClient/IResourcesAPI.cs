@@ -34,6 +34,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets all image resources
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -42,16 +45,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IList<ImageResource>>> GetAllImageResourcesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <param name='name'>
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<HttpOperationResponse<string>> GetImageResourceWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        /// <summary>
+        /// Adds image resource
+        /// </summary>
         /// <param name='model'>
         /// </param>
         /// <param name='customHeaders'>
@@ -62,6 +58,22 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> AddImageResourceWithHttpMessagesAsync(ImageResourceModel model = default(ImageResourceModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets image resource by name
+        /// </summary>
+        /// <param name='name'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<string>> GetImageResourceWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Delete image resource by name
+        /// </summary>
         /// <param name='name'>
         /// </param>
         /// <param name='customHeaders'>
@@ -83,6 +95,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<object>> IsAliveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets all languages
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -91,7 +106,11 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IList<Language>>> GetAllLanguagesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Adds language
+        /// </summary>
         /// <param name='model'>
+        /// language model
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -101,6 +120,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> AddLanguageWithHttpMessagesAsync(Language model = default(Language), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes language by code
+        /// </summary>
         /// <param name='code'>
         /// </param>
         /// <param name='customHeaders'>
@@ -111,6 +133,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> DeleteLanguageWithHttpMessagesAsync(string code, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets all text resources
+        /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
@@ -119,31 +144,11 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<IList<TextResource>>> GetAllTextResourcesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
-        /// <param name='lang'>
-        /// </param>
-        /// <param name='name'>
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<HttpOperationResponse<TextResource>> GetTextResourceWithHttpMessagesAsync(string lang, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
-        /// <param name='lang'>
-        /// </param>
-        /// <param name='name'>
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<HttpOperationResponse<IList<TextResource>>> GetTextResourcesWithHttpMessagesAsync(string lang, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        /// <summary>
+        /// Adds text resource
+        /// </summary>
         /// <param name='model'>
+        /// text resource model
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -153,6 +158,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> AddTextResourceWithHttpMessagesAsync(TextResourceModel model = default(TextResourceModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Deletes text reosource
+        /// </summary>
         /// <param name='model'>
         /// </param>
         /// <param name='customHeaders'>
@@ -162,6 +170,45 @@ namespace Lykke.Service.Resources.Client.AutorestClient
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse<ErrorResponse>> DeleteTextResourceWithHttpMessagesAsync(DeleteTextResourceModel model = default(DeleteTextResourceModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets text resource by language and name
+        /// </summary>
+        /// <param name='lang'>
+        /// languages
+        /// </param>
+        /// <param name='name'>
+        /// full name of the resource
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetTextResourceWithHttpMessagesAsync(string lang, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets section of text resources
+        /// </summary>
+        /// <remarks>
+        /// Returns text resources in the specified section, for example:
+        /// lykke.ios will return all text resources under this section
+        /// (lykke.ios.text, lykke.ios.title etc.)
+        /// </remarks>
+        /// <param name='lang'>
+        /// language
+        /// </param>
+        /// <param name='name'>
+        /// full name of the section
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetTextResourceSectionWithHttpMessagesAsync(string lang, string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

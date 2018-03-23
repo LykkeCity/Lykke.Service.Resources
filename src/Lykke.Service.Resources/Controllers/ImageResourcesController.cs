@@ -12,7 +12,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.Resources.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/imageresources")]
     public class ImageResourcesController : Controller
     {
         private readonly IImageResourcesService _imageResourcesService;
@@ -27,6 +27,10 @@ namespace Lykke.Service.Resources.Controllers
             _settings = settings;
         }
         
+        /// <summary>
+        /// Gets all image resources
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [SwaggerOperation("GetAllImageResources")]
         [ProducesResponseType(typeof(IEnumerable<ImageResource>), (int)HttpStatusCode.OK)]
@@ -41,6 +45,11 @@ namespace Lykke.Service.Resources.Controllers
             return Ok(resource);
         }
         
+        /// <summary>
+        /// Gets image resource by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("{name}")]
         [SwaggerOperation("GetImageResource")]
         [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
@@ -55,7 +64,12 @@ namespace Lykke.Service.Resources.Controllers
             return Json(resource);
         }
         
-        [HttpPost("add")]
+        /// <summary>
+        /// Adds image resource
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
         [SwaggerOperation("AddImageResource")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
@@ -77,7 +91,12 @@ namespace Lykke.Service.Resources.Controllers
             return Ok();
         }
         
-        [HttpPost("delete/{name}")]
+        /// <summary>
+        /// Delete image resource by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpDelete("{name}")]
         [SwaggerOperation("DeleteImageResource")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]

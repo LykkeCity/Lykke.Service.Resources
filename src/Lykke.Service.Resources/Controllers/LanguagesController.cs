@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Lykke.Service.Resources.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/languages")]
     public class LanguagesController : Controller
     {
         private readonly ILanguagesService _service;
@@ -22,6 +22,10 @@ namespace Lykke.Service.Resources.Controllers
             _service = languagesService;
         }
         
+        /// <summary>
+        /// Gets all languages
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [SwaggerOperation("GetAllLanguages")]
         [ProducesResponseType(typeof(IEnumerable<Language>), (int)HttpStatusCode.OK)]
@@ -36,7 +40,12 @@ namespace Lykke.Service.Resources.Controllers
             return Ok(languages);
         }
         
-        [HttpPost("add")]
+        /// <summary>
+        /// Adds language
+        /// </summary>
+        /// <param name="model">language model</param>
+        /// <returns></returns>
+        [HttpPost]
         [SwaggerOperation("AddLanguage")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
@@ -55,7 +64,12 @@ namespace Lykke.Service.Resources.Controllers
             return Ok();
         }
         
-        [HttpPost("delete/{code}")]
+        /// <summary>
+        /// Deletes language by code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        [HttpDelete("{code}")]
         [SwaggerOperation("DeleteLanguage")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]

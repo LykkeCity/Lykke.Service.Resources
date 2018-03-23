@@ -18,12 +18,13 @@ namespace Lykke.Service.Resources.Client
         Task<TextResource> GetTextResourceAsync(string lang, string name);
 
         /// <summary>
-        /// Gets text resources by language and part of the resource name
+        /// Gets section of text resources
         /// </summary>
+        /// <remarks>Returns text resources in the specified section, for example: lykke.ios will return all text resources under this section (lykke.ios.text, lykke.ios.title etc.)</remarks>
         /// <param name="lang">language</param>
-        /// <param name="name">part of the resource name (namespace)</param>
+        /// <param name="name">full name of the section</param>
         /// <returns></returns>
-        Task<IEnumerable<TextResource>> GetTextResourcesAsync(string lang, string name);
+        Task<IEnumerable<TextResource>> GetTextResourceSectionAsync(string lang, string name);
         
         /// <summary>
         /// Gets list of all text resources

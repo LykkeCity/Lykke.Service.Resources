@@ -17,6 +17,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
     /// </summary>
     public static partial class ResourcesAPIExtensions
     {
+            /// <summary>
+            /// Gets all image resources
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -25,6 +28,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.GetAllImageResourcesAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets all image resources
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -39,32 +45,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            public static string GetImageResource(this IResourcesAPI operations, string name)
-            {
-                return operations.GetImageResourceAsync(name).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<string> GetImageResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetImageResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
+            /// <summary>
+            /// Adds image resource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -75,6 +58,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.AddImageResourceAsync(model).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds image resource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -91,6 +77,41 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Gets image resource by name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            public static string GetImageResource(this IResourcesAPI operations, string name)
+            {
+                return operations.GetImageResourceAsync(name).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets image resource by name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<string> GetImageResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetImageResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Delete image resource by name
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -101,6 +122,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.DeleteImageResourceAsync(name).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Delete image resource by name
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -145,6 +169,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Gets all languages
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -153,6 +180,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.GetAllLanguagesAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets all languages
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -167,20 +197,28 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Adds language
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// language model
             /// </param>
             public static ErrorResponse AddLanguage(this IResourcesAPI operations, Language model = default(Language))
             {
                 return operations.AddLanguageAsync(model).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds language
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// language model
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -193,6 +231,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes language by code
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -203,6 +244,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.DeleteLanguageAsync(code).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes language by code
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -219,6 +263,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Gets all text resources
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -227,6 +274,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.GetAllTextResourcesAsync().GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Gets all text resources
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -241,80 +291,28 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='lang'>
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            public static TextResource GetTextResource(this IResourcesAPI operations, string lang, string name)
-            {
-                return operations.GetTextResourceAsync(lang, name).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='lang'>
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<TextResource> GetTextResourceAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetTextResourceWithHttpMessagesAsync(lang, name, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='lang'>
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            public static IList<TextResource> GetTextResources(this IResourcesAPI operations, string lang, string name)
-            {
-                return operations.GetTextResourcesAsync(lang, name).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='lang'>
-            /// </param>
-            /// <param name='name'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<IList<TextResource>> GetTextResourcesAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetTextResourcesWithHttpMessagesAsync(lang, name, null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
+            /// <summary>
+            /// Adds text resource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// text resource model
             /// </param>
             public static ErrorResponse AddTextResource(this IResourcesAPI operations, TextResourceModel model = default(TextResourceModel))
             {
                 return operations.AddTextResourceAsync(model).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Adds text resource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// text resource model
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -327,6 +325,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 }
             }
 
+            /// <summary>
+            /// Deletes text reosource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -337,6 +338,9 @@ namespace Lykke.Service.Resources.Client.AutorestClient
                 return operations.DeleteTextResourceAsync(model).GetAwaiter().GetResult();
             }
 
+            /// <summary>
+            /// Deletes text reosource
+            /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
@@ -348,6 +352,96 @@ namespace Lykke.Service.Resources.Client.AutorestClient
             public static async Task<ErrorResponse> DeleteTextResourceAsync(this IResourcesAPI operations, DeleteTextResourceModel model = default(DeleteTextResourceModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.DeleteTextResourceWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets text resource by language and name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// languages
+            /// </param>
+            /// <param name='name'>
+            /// full name of the resource
+            /// </param>
+            public static object GetTextResource(this IResourcesAPI operations, string lang, string name)
+            {
+                return operations.GetTextResourceAsync(lang, name).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets text resource by language and name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// languages
+            /// </param>
+            /// <param name='name'>
+            /// full name of the resource
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetTextResourceAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetTextResourceWithHttpMessagesAsync(lang, name, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets section of text resources
+            /// </summary>
+            /// <remarks>
+            /// Returns text resources in the specified section, for example: lykke.ios
+            /// will return all text resources under this section (lykke.ios.text,
+            /// lykke.ios.title etc.)
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// language
+            /// </param>
+            /// <param name='name'>
+            /// full name of the section
+            /// </param>
+            public static object GetTextResourceSection(this IResourcesAPI operations, string lang, string name)
+            {
+                return operations.GetTextResourceSectionAsync(lang, name).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets section of text resources
+            /// </summary>
+            /// <remarks>
+            /// Returns text resources in the specified section, for example: lykke.ios
+            /// will return all text resources under this section (lykke.ios.text,
+            /// lykke.ios.title etc.)
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='lang'>
+            /// language
+            /// </param>
+            /// <param name='name'>
+            /// full name of the section
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetTextResourceSectionAsync(this IResourcesAPI operations, string lang, string name, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetTextResourceSectionWithHttpMessagesAsync(lang, name, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
