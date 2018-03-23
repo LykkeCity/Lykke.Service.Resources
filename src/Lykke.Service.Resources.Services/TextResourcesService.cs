@@ -55,7 +55,7 @@ namespace Lykke.Service.Resources.Services
         public async Task LoadAllAsync()
         {
             var resources = await _repository.GetAllAsync();
-            var dict = resources.GroupBy(item => item.Lang).ToDictionary(item => item.Key, item => item.ToList());
+            var dict = resources.GroupBy(item => item.Lang).ToDictionary(item => item.Key, item => item.Select(TextResource.Create).ToList());
             _cache = new ConcurrentDictionary<string, List<ITextResource>>(dict);
         }
 
@@ -75,7 +75,7 @@ namespace Lykke.Service.Resources.Services
                 if (resource != null)
                     items.Remove(resource);
 
-                items.Add(entity);
+                items.Add(TextResource.Create(entity));
             }
         }
 

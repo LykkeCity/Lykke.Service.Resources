@@ -34,7 +34,7 @@ namespace Lykke.Service.Resources.Services
         public async Task LoadAllAsync()
         {
             var languages = await _repository.GetAllAsync();
-            _cache.AddRange(languages);
+            _cache.AddRange(languages.Select(Language.Create));
         }
 
         public async Task AddAsync(string code, string name)
@@ -46,7 +46,7 @@ namespace Lykke.Service.Resources.Services
             if (existing != null)
                 _cache.Remove(existing);
             
-            _cache.Add(language);
+            _cache.Add(Language.Create(language));
         }
 
         public async Task DeleteAsync(string code)
