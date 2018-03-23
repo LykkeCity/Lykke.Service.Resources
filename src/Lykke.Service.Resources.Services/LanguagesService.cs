@@ -40,6 +40,12 @@ namespace Lykke.Service.Resources.Services
         public async Task AddAsync(string code, string name)
         {
             var language = await _repository.AddAsync(code, name);
+
+            var existing = Get(code);
+            
+            if (existing != null)
+                _cache.Remove(existing);
+            
             _cache.Add(language);
         }
 
