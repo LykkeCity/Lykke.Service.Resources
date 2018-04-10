@@ -2,8 +2,10 @@
 using AzureStorage.Blob;
 using AzureStorage.Tables;
 using Common.Log;
+using Lykke.Service.Resources.AzureRepositories.GroupResources;
 using Lykke.Service.Resources.AzureRepositories.Languages;
 using Lykke.Service.Resources.AzureRepositories.TextResources;
+using Lykke.Service.Resources.Core.Domain.GroupResources;
 using Lykke.Service.Resources.Core.Domain.Languages;
 using Lykke.Service.Resources.Core.Domain.TextResources;
 using Lykke.Service.Resources.Core.Services;
@@ -54,6 +56,11 @@ namespace Lykke.Service.Resources.Modules
                 new LanguagesRepository(AzureTableStorage<LanguageEntity>.Create(
                     _settings.ConnectionString(x => x.Db.DataConnString), "ResourceLanguages", _log))
             ).SingleInstance();
+            
+            builder.RegisterInstance<IGroupResourceRepository>(
+                new GroupResourcesRepository(AzureTableStorage<GroupResourceEntity>.Create(
+                    _settings.ConnectionString(x => x.Db.DataConnString), "GroupResources", _log))
+            ).SingleInstance();
 
             builder.RegisterType<TextResourcesService>()
                 .As<ITextResourcesService>()
@@ -65,6 +72,10 @@ namespace Lykke.Service.Resources.Modules
             
             builder.RegisterType<LanguagesService>()
                 .As<ILanguagesService>()
+                .SingleInstance();
+            
+            builder.RegisterType<GroupResourcesService>()
+                .As<IGroupResourcesService>()
                 .SingleInstance();
         }
     }

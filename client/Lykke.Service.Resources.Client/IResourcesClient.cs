@@ -77,7 +77,6 @@ namespace Lykke.Service.Resources.Client
         /// <returns></returns>
         Task DeleteImageResourceAsync(string name);
         
-        
         /// <summary>
         /// Gets list of all languages
         /// </summary>
@@ -98,5 +97,57 @@ namespace Lykke.Service.Resources.Client
         /// <param name="code">code of the language (i.e en)</param>
         /// <returns></returns>
         Task DeleteLanguageAsync(string code);
+        
+        /// <summary>
+        /// Gets group resource by name
+        /// </summary>
+        /// <param name="name">name of the resource</param>
+        /// <returns></returns>
+        Task<GroupResource> GetGroupResourceAsync(string name);
+
+        /// <summary>
+        /// Gets section of group resources
+        /// </summary>
+        /// <remarks>Returns group resources in the specified section, for example: assetDetails will return all text resources under this section (assetDetails.iconLinks, assetDetails.headerLinks etc.)</remarks>
+        /// <param name="name">full name of the section</param>
+        /// <returns></returns>
+        Task<IEnumerable<GroupResource>> GetGroupResourceSectionAsync(string name);
+        
+        /// <summary>
+        /// Gets list of all group resources
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<GroupResource>> GetAllGroupResourcesAsync();
+        
+        /// <summary>
+        /// Adds list of group resources
+        /// </summary>
+        /// <param name="name">name of the resource</param>
+        /// <param name="values">group resources</param>
+        /// <returns></returns>
+        Task AddGroupResourcesAsync(string name, GroupItem[] values);
+        
+        /// <summary>
+        /// Adds group resource item
+        /// </summary>
+        /// <param name="name">name of the resource</param>
+        /// <param name="value">group resource</param>
+        /// <returns></returns>
+        Task AddGroupResourceItemAsync(string name, GroupItem value);
+
+        /// <summary>
+        /// Deletes group resource by resource name
+        /// </summary>
+        /// <param name="name">name of the resource</param>
+        /// <returns></returns>
+        Task DeleteGroupResourceAsync(string name);
+        
+        /// <summary>
+        /// Deletes group resource item by resource name and item id
+        /// </summary>
+        /// <param name="name">name of the resource</param>
+        /// <param name="id">id of the resource item</param>
+        /// <returns></returns>
+        Task DeleteGroupResourceItemAsync(string name, string id);
     }
 }

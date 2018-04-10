@@ -35,6 +35,104 @@ namespace Lykke.Service.Resources.Client.AutorestClient
 
 
         /// <summary>
+        /// Gets all group resources
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<GroupResource>>> GetAllGroupResourcesWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds group resources
+        /// </summary>
+        /// <param name='model'>
+        /// list of group resources
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> AddGroupResourcesWithHttpMessagesAsync(GroupResourcesModel model = default(GroupResourcesModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes group resource
+        /// </summary>
+        /// <param name='model'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> DeleteGroupResourceWithHttpMessagesAsync(DeleteGroupResourceModel model = default(DeleteGroupResourceModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets group resource by name
+        /// </summary>
+        /// <param name='name'>
+        /// full name of the resource
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetGroupResourceWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets section of group resources
+        /// </summary>
+        /// <remarks>
+        /// Returns group resources in the specified section, for example:
+        /// assetDetails will return all group resources under this section
+        /// (assetDetails.iconLinks, assetDetails.headerLinks etc.)
+        /// </remarks>
+        /// <param name='name'>
+        /// full name of the section
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> GetGroupResourceSectionWithHttpMessagesAsync(string name, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Adds group resource item
+        /// </summary>
+        /// <param name='model'>
+        /// group resource item
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> AddGroupResourceItemWithHttpMessagesAsync(GroupResourceModel model = default(GroupResourceModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes group resource item
+        /// </summary>
+        /// <param name='model'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<ErrorResponse>> DeleteGroupResourceItemWithHttpMessagesAsync(DeleteGroupResourceItemModel model = default(DeleteGroupResourceItemModel), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Gets all image resources
         /// </summary>
         /// <param name='customHeaders'>
