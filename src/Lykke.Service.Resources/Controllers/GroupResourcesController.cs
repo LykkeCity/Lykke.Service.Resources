@@ -4,8 +4,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Common;
 using Lykke.Common.ApiLibrary.Extensions;
-using Lykke.Service.Resources.Client;
-using Lykke.Service.Resources.Client.AutorestClient.Models;
 using Lykke.Service.Resources.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
