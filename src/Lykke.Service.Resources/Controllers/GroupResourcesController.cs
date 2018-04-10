@@ -113,7 +113,7 @@ namespace Lykke.Service.Resources.Controllers
             var group = _groupResourcesService.Get(model.Name);
 
             if (group != null)
-                return BadRequest(ErrorResponse.Create($"{nameof(model.Name)} group is already exists"));
+                return BadRequest(ErrorResponse.Create($"'{model.Name}' group is already exists"));
 
             if (model.Values.Length == 0)
                 return BadRequest(ErrorResponse.Create($"{nameof(model.Values)} is empty"));
