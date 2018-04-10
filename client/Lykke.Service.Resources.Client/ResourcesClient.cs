@@ -11,7 +11,6 @@ namespace Lykke.Service.Resources.Client
     /// <inheritdoc cref="IResourcesClient"/>>
     public class ResourcesClient : IResourcesClient, IDisposable
     {
-        private readonly ILog _log;
         private ResourcesAPI _service;
 
         /// <summary>
@@ -19,9 +18,8 @@ namespace Lykke.Service.Resources.Client
         /// <param name="serviceUrl"></param>
         /// <param name="log"></param>
         [UsedImplicitly]
-        public ResourcesClient(string serviceUrl, ILog log)
+        public ResourcesClient(string serviceUrl)
         {
-            _log = log;
             _service = new ResourcesAPI(new Uri(serviceUrl));
         }
 
@@ -139,6 +137,80 @@ namespace Lykke.Service.Resources.Client
         public async Task DeleteLanguageAsync(string code)
         {
             var response = await _service.DeleteLanguageAsync(code);
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        /// <inheritdoc />
+        public async Task<GroupResource> GetGroupResourceAsync(string name)
+        {
+            var response = await _service.GetGroupResourceAsync(name);
+            
+            switch (response)
+            {
+                case GroupResource result:
+                    return result;
+                case ErrorResponse error:
+                    throw new Exception(error.ErrorMessage);
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<GroupResource>> GetGroupResourceSectionAsync(string name)
+        {
+            var response = await _service.GetGroupResourceSectionAsync(name);
+            
+            switch (response)
+            {
+                case List<GroupResource> result:
+                    return result;
+                case ErrorResponse error:
+                    throw new Exception(error.ErrorMessage);
+            }
+
+            return Array.Empty<GroupResource>();
+        }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<GroupResource>> GetAllGroupResourcesAsync()
+        {
+            return await _service.GetAllGroupResourcesAsync();
+        }
+
+        /// <inheritdoc />
+        public async Task AddGroupResourcesAsync(string name, GroupItem[] values)
+        {
+            var response = await _service.AddGroupResourcesAsync(new GroupResourcesModel { Name = name, Values = values });
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        /// <inheritdoc />
+        public async Task AddGroupResourceItemAsync(string name, GroupItem value)
+        {
+            var response = await _service.AddGroupResourceItemAsync(new GroupResourceModel { Name = name, Value = value });
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        /// <inheritdoc />
+        public async Task DeleteGroupResourceAsync(string name)
+        {
+            var response = await _service.DeleteGroupResourceAsync(new DeleteGroupResourceModel{Name = name});
+            
+            if (response != null)
+                throw new Exception(response.ErrorMessage);
+        }
+
+        /// <inheritdoc />
+        public async Task DeleteGroupResourceItemAsync(string name, string id)
+        {
+            var response = await _service.DeleteGroupResourceItemAsync(new DeleteGroupResourceItemModel{Name = name, Id = id});
             
             if (response != null)
                 throw new Exception(response.ErrorMessage);

@@ -4,6 +4,8 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AzureStorage.Tables;
 using Common.Log;
+using Lykke.AzureStorage.Tables.Entity.Metamodel;
+using Lykke.AzureStorage.Tables.Entity.Metamodel.Providers;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
@@ -60,6 +62,9 @@ namespace Lykke.Service.Resources
                 builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.ResourcesService), Log));
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
+                
+                var provider = new AnnotationsBasedMetamodelProvider();
+                EntityMetamodel.Configure(provider);
 
                 return new AutofacServiceProvider(ApplicationContainer);
             }

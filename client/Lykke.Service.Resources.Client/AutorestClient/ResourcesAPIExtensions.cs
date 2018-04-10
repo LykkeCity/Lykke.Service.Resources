@@ -18,6 +18,244 @@ namespace Lykke.Service.Resources.Client.AutorestClient
     public static partial class ResourcesAPIExtensions
     {
             /// <summary>
+            /// Gets all group resources
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<GroupResource> GetAllGroupResources(this IResourcesAPI operations)
+            {
+                return operations.GetAllGroupResourcesAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets all group resources
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<GroupResource>> GetAllGroupResourcesAsync(this IResourcesAPI operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllGroupResourcesWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Adds group resources
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// list of group resources
+            /// </param>
+            public static ErrorResponse AddGroupResources(this IResourcesAPI operations, GroupResourcesModel model = default(GroupResourcesModel))
+            {
+                return operations.AddGroupResourcesAsync(model).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds group resources
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// list of group resources
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> AddGroupResourcesAsync(this IResourcesAPI operations, GroupResourcesModel model = default(GroupResourcesModel), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddGroupResourcesWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes group resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            public static ErrorResponse DeleteGroupResource(this IResourcesAPI operations, DeleteGroupResourceModel model = default(DeleteGroupResourceModel))
+            {
+                return operations.DeleteGroupResourceAsync(model).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes group resource
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> DeleteGroupResourceAsync(this IResourcesAPI operations, DeleteGroupResourceModel model = default(DeleteGroupResourceModel), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteGroupResourceWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets group resource by name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// full name of the resource
+            /// </param>
+            public static object GetGroupResource(this IResourcesAPI operations, string name)
+            {
+                return operations.GetGroupResourceAsync(name).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets group resource by name
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// full name of the resource
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetGroupResourceAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetGroupResourceWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets section of group resources
+            /// </summary>
+            /// <remarks>
+            /// Returns group resources in the specified section, for example: assetDetails
+            /// will return all group resources under this section (assetDetails.iconLinks,
+            /// assetDetails.headerLinks etc.)
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// full name of the section
+            /// </param>
+            public static object GetGroupResourceSection(this IResourcesAPI operations, string name)
+            {
+                return operations.GetGroupResourceSectionAsync(name).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets section of group resources
+            /// </summary>
+            /// <remarks>
+            /// Returns group resources in the specified section, for example: assetDetails
+            /// will return all group resources under this section (assetDetails.iconLinks,
+            /// assetDetails.headerLinks etc.)
+            /// </remarks>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='name'>
+            /// full name of the section
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> GetGroupResourceSectionAsync(this IResourcesAPI operations, string name, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetGroupResourceSectionWithHttpMessagesAsync(name, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Adds group resource item
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// group resource item
+            /// </param>
+            public static ErrorResponse AddGroupResourceItem(this IResourcesAPI operations, GroupResourceModel model = default(GroupResourceModel))
+            {
+                return operations.AddGroupResourceItemAsync(model).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Adds group resource item
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// group resource item
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> AddGroupResourceItemAsync(this IResourcesAPI operations, GroupResourceModel model = default(GroupResourceModel), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.AddGroupResourceItemWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes group resource item
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            public static ErrorResponse DeleteGroupResourceItem(this IResourcesAPI operations, DeleteGroupResourceItemModel model = default(DeleteGroupResourceItemModel))
+            {
+                return operations.DeleteGroupResourceItemAsync(model).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes group resource item
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='model'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ErrorResponse> DeleteGroupResourceItemAsync(this IResourcesAPI operations, DeleteGroupResourceItemModel model = default(DeleteGroupResourceItemModel), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteGroupResourceItemWithHttpMessagesAsync(model, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Gets all image resources
             /// </summary>
             /// <param name='operations'>
