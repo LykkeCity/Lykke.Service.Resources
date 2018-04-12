@@ -117,6 +117,17 @@ namespace Lykke.Service.Resources.Controllers
 
             if (model.Values.Length == 0)
                 return BadRequest(ErrorResponse.Create($"{nameof(model.Values)} is empty"));
+            
+            if (model.Values.Any(item => string.IsNullOrWhiteSpace(item.Id)))
+                return BadRequest(ErrorResponse.Create("Id can't be empty"));
+            
+            if (model.Values.Any(item => string.IsNullOrWhiteSpace(item.Value)))
+                return BadRequest(ErrorResponse.Create("Value can't be empty")); 
+
+            var ids = model.Values.Select(item => item.Id).Distinct().ToArray();
+            
+            if (ids.Length != model.Values.Length)
+                return BadRequest(ErrorResponse.Create("Id must be unique"));
 
             await _groupResourcesService.AddAsync(model.Name, model.Values);
             return Ok();
@@ -138,6 +149,12 @@ namespace Lykke.Service.Resources.Controllers
 
             if (!model.Name.IsValidPartitionOrRowKey())
                 return BadRequest(ErrorResponse.Create($"Invalid {nameof(model.Name)} value"));
+            
+            if (string.IsNullOrWhiteSpace(model.Value.Id))
+                return BadRequest(ErrorResponse.Create("Id can't be empty"));
+            
+            if (string.IsNullOrWhiteSpace(model.Value.Value))
+                return BadRequest(ErrorResponse.Create("Value can't be empty"));
 
             await _groupResourcesService.AddItemAsync(model.Name, model.Value);
             return Ok();
