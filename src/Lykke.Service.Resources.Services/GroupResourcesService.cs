@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lykke.Service.Resources.Core.Domain.GroupResources;
-using Lykke.Service.Resources.Core.Domain.TextResources;
 using Lykke.Service.Resources.Core.Services;
 
 namespace Lykke.Service.Resources.Services
@@ -14,7 +10,7 @@ namespace Lykke.Service.Resources.Services
     {
         private readonly IGroupResourceRepository _repository;
         private const string GroupDelimiter = ".";
-        private List<IGroupResource> _cache = new List<IGroupResource>();
+        private Dictionary<string, IGroupResource> _cache = new Dictionary<string, IGroupResource>();
 
         public GroupResourcesService(
             IGroupResourceRepository repository
@@ -25,7 +21,7 @@ namespace Lykke.Service.Resources.Services
         
         public IGroupResource Get(string name)
         {
-            return _cache.FirstOrDefault(item => item.Name == name);
+            return _cache.ContainsKey(name) ? _cache[name] : null;
         }
 
         public IEnumerable<IGroupResource> GetGroup(string groupName)
@@ -34,30 +30,28 @@ namespace Lykke.Service.Resources.Services
                 ? string.Empty 
                 : groupName.TrimEnd('.') + GroupDelimiter;
 
-            return _cache.Where(item => item.Name.StartsWith(prefix));
+            return _cache.Where(item => item.Key.StartsWith(prefix)).Select(item => item.Value);
         }
 
         public IEnumerable<IGroupResource> GetAll()
         {
-            return _cache.OrderBy(item => item.Name);
+            return _cache.Values.OrderBy(item => item.Name);
         }
 
         public async Task LoadAllAsync()
         {
             var resources = await _repository.GetAllAsync();
-            _cache = resources.Select(GroupResource.Create).ToList();
+            _cache = resources.Select(GroupResource.Create).ToDictionary(item => item.Name);
         }
 
         public async Task AddAsync(string name, GroupItem[] value)
         {
             var entity = await _repository.AddAsync(new GroupResource{Name = name, Value = value});
 
-            var resource = Get(name);
-                
-            if (resource != null)
-                _cache.Remove(resource);
-
-            _cache.Add(GroupResource.Create(entity));
+            if (_cache.ContainsKey(name))
+                _cache.Remove(name);
+            
+            _cache.Add(name, GroupResource.Create(entity));
         }
 
         public async Task AddItemAsync(string name, GroupItem value)
@@ -93,10 +87,8 @@ namespace Lykke.Service.Resources.Services
         {
             await _repository.DeleteAsync(name);
             
-            var resource = _cache.FirstOrDefault(item => item.Name == name);
-                
-            if (resource != null)
-                _cache.Remove(resource);
+            if (_cache.ContainsKey(name))
+                _cache.Remove(name);
         }
 
         public async Task DeleteItemAsync(string name, string id)
