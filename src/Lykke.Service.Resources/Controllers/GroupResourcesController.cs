@@ -156,11 +156,6 @@ namespace Lykke.Service.Resources.Controllers
             if (string.IsNullOrWhiteSpace(model.Value.Value))
                 return BadRequest(ErrorResponse.Create("Value can't be empty"));
 
-            var group = _groupResourcesService.Get(model.Name);
-            
-            if (group != null && group.Value.Any(item => item.Id == model.Value.Id))
-                return BadRequest(ErrorResponse.Create($"Item with Id '{model.Value.Id}' is already added to the group '{model.Name}'"));
-
             await _groupResourcesService.AddItemAsync(model.Name, model.Value);
             return Ok();
         }
