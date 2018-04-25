@@ -52,7 +52,7 @@ namespace Lykke.Service.Resources.Services
             _cache[name] = GroupResource.Create(entity);
         }
 
-        public async Task AddItemAsync(string name, GroupItem value)
+        public async Task AddOrUpdateItemAsync(string name, GroupItem value)
         {
             var values = new List<GroupItem>();
             

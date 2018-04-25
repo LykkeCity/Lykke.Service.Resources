@@ -156,7 +156,7 @@ namespace Lykke.Service.Resources.Controllers
             if (string.IsNullOrWhiteSpace(model.Value.Value))
                 return BadRequest(ErrorResponse.Create("Value can't be empty"));
 
-            await _groupResourcesService.AddItemAsync(model.Name, model.Value);
+            await _groupResourcesService.AddOrUpdateItemAsync(model.Name, model.Value);
             return Ok();
         }
         
