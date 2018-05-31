@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Common.Log;
 using JetBrains.Annotations;
@@ -20,7 +21,7 @@ namespace Lykke.Service.Resources.Client
         [UsedImplicitly]
         public ResourcesClient(string serviceUrl)
         {
-            _service = new ResourcesAPI(new Uri(serviceUrl));
+            _service = new ResourcesAPI(new Uri(serviceUrl), new HttpClient());
         }
 
         /// <inheritdoc />
@@ -36,7 +37,7 @@ namespace Lykke.Service.Resources.Client
         public async Task<TextResource> GetTextResourceAsync(string lang, string name)
         {
             var response = await _service.GetTextResourceAsync(lang, name);
-            
+
             switch (response)
             {
                 case TextResource result:
@@ -52,7 +53,7 @@ namespace Lykke.Service.Resources.Client
         public async Task<IEnumerable<TextResource>> GetTextResourceSectionAsync(string lang, string name)
         {
             var response = await _service.GetTextResourceSectionAsync(lang, name);
-            
+
             switch (response)
             {
                 case List<TextResource> result:
@@ -74,7 +75,7 @@ namespace Lykke.Service.Resources.Client
         public async Task AddTextResourceAsync(string lang, string name, string value)
         {
             var response = await _service.AddTextResourceAsync(new TextResourceModel(lang, name, value));
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -83,7 +84,7 @@ namespace Lykke.Service.Resources.Client
         public async Task DeleteTextResourceAsync(string lang, string name)
         {
             var response = await _service.DeleteTextResourceAsync(new DeleteTextResourceModel(lang, name));
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -104,16 +105,16 @@ namespace Lykke.Service.Resources.Client
         public async Task AddImageResourceAsync(string name, byte[] data)
         {
             var response = await _service.AddImageResourceAsync(new ImageResourceModel(name, data));
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
-        
+
         /// <inheritdoc />
         public async Task DeleteImageResourceAsync(string name)
         {
             var response = await _service.DeleteImageResourceAsync(name);
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -128,7 +129,7 @@ namespace Lykke.Service.Resources.Client
         public async Task AddLanguageAsync(string code, string name)
         {
             var response = await _service.AddLanguageAsync(new Language(code, name));
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -137,7 +138,7 @@ namespace Lykke.Service.Resources.Client
         public async Task DeleteLanguageAsync(string code)
         {
             var response = await _service.DeleteLanguageAsync(code);
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -146,7 +147,7 @@ namespace Lykke.Service.Resources.Client
         public async Task<GroupResource> GetGroupResourceAsync(string name)
         {
             var response = await _service.GetGroupResourceAsync(name);
-            
+
             switch (response)
             {
                 case GroupResource result:
@@ -162,7 +163,7 @@ namespace Lykke.Service.Resources.Client
         public async Task<IEnumerable<GroupResource>> GetGroupResourceSectionAsync(string name)
         {
             var response = await _service.GetGroupResourceSectionAsync(name);
-            
+
             switch (response)
             {
                 case List<GroupResource> result:
@@ -184,7 +185,7 @@ namespace Lykke.Service.Resources.Client
         public async Task AddGroupResourcesAsync(string name, GroupItem[] values)
         {
             var response = await _service.AddGroupResourcesAsync(new GroupResourcesModel { Name = name, Values = values });
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -193,7 +194,7 @@ namespace Lykke.Service.Resources.Client
         public async Task AddGroupResourceItemAsync(string name, GroupItem value)
         {
             var response = await _service.AddGroupResourceItemAsync(new GroupResourceModel { Name = name, Value = value });
-            
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -201,8 +202,8 @@ namespace Lykke.Service.Resources.Client
         /// <inheritdoc />
         public async Task DeleteGroupResourceAsync(string name)
         {
-            var response = await _service.DeleteGroupResourceAsync(new DeleteGroupResourceModel{Name = name});
-            
+            var response = await _service.DeleteGroupResourceAsync(new DeleteGroupResourceModel { Name = name });
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
@@ -210,8 +211,8 @@ namespace Lykke.Service.Resources.Client
         /// <inheritdoc />
         public async Task DeleteGroupResourceItemAsync(string name, string id)
         {
-            var response = await _service.DeleteGroupResourceItemAsync(new DeleteGroupResourceItemModel{Name = name, Id = id});
-            
+            var response = await _service.DeleteGroupResourceItemAsync(new DeleteGroupResourceItemModel { Name = name, Id = id });
+
             if (response != null)
                 throw new Exception(response.ErrorMessage);
         }
