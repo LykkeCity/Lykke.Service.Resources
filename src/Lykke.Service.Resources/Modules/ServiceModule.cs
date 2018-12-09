@@ -36,6 +36,9 @@ namespace Lykke.Service.Resources.Modules
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>()
                 .SingleInstance();
+            
+            builder.RegisterInstance(_settings.CurrentValue.ResourcesService)
+                .SingleInstance();
 
             builder.Register(ctx =>
                 new TextResourcesRepository(AzureTableStorage<TextResourceEntity>.Create(
