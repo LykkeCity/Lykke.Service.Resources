@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Common.Log;
+using Lykke.Common.Log;
+using Lykke.Sdk;
 using Lykke.Service.Resources.Core.Services;
 
 namespace Lykke.Service.Resources.Services
@@ -24,32 +26,32 @@ namespace Lykke.Service.Resources.Services
             IImageResourcesService imageResourcesService,
             ILanguagesService languagesService,
             IGroupResourcesService groupResourcesService,
-            ILog log)
+            ILogFactory logFactory)
         {
             _textResourcesService = textResourcesService;
             _imageResourcesService = imageResourcesService;
             _languagesService = languagesService;
             _groupResourcesService = groupResourcesService;
-            _log = log;
+            _log = logFactory.CreateLog(this);
         }
 
         public async Task StartAsync()
         {
-            _log.WriteInfo(nameof(StartAsync), null, "Filling text resources cache...");
+            _log.Info(nameof(StartAsync), "Filling text resources cache...");
             await _textResourcesService.LoadAllAsync();
-            _log.WriteInfo(nameof(StartAsync), null, "Text resources cache is initialized");
+            _log.Info(nameof(StartAsync), "Text resources cache is initialized");
             
-            _log.WriteInfo(nameof(StartAsync), null, "Filling image resources cache...");
+            _log.Info(nameof(StartAsync), "Filling image resources cache...");
             await _imageResourcesService.LoadAllAsync();
-            _log.WriteInfo(nameof(StartAsync), null, "Image resources cache is initialized");
+            _log.Info(nameof(StartAsync), "Image resources cache is initialized");
             
-            _log.WriteInfo(nameof(StartAsync), null, "Filling group resources cache...");
+            _log.Info(nameof(StartAsync), "Filling group resources cache...");
             await _groupResourcesService.LoadAllAsync();
-            _log.WriteInfo(nameof(StartAsync), null, "Group resources cache is initialized");
+            _log.Info(nameof(StartAsync), "Group resources cache is initialized");
             
-            _log.WriteInfo(nameof(StartAsync), null, "Filling languages cache...");
+            _log.Info(nameof(StartAsync), "Filling languages cache...");
             await _languagesService.LoadAllAsync();
-            _log.WriteInfo(nameof(StartAsync), null, "Languages cache is initialized");
+            _log.Info(nameof(StartAsync), "Languages cache is initialized");
         }
     }
 }
