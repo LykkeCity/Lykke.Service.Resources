@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using Common;
 using Common.Log;
-using Lykke.Service.Resources.Core.Services;
+using Lykke.Common.Log;
+using Lykke.Sdk;
 
 namespace Lykke.Service.Resources.Services
 {
@@ -16,9 +17,9 @@ namespace Lykke.Service.Resources.Services
         private readonly ILog _log;
         private readonly List<IStopable> _items = new List<IStopable>();
 
-        public ShutdownManager(ILog log)
+        public ShutdownManager(ILogFactory logFactory)
         {
-            _log = log;
+            _log = logFactory.CreateLog(this);
         }
 
         public void Register(IStopable stopable)
