@@ -1,7 +1,9 @@
 ﻿using Autofac;
 using AzureStorage.Blob;
 using AzureStorage.Tables;
-using Common.Log;
+using JetBrains.Annotations;
+using Lykke.Common.Log;
+using Lykke.Sdk;
 using Lykke.Service.Resources.AzureRepositories.GroupResources;
 using Lykke.Service.Resources.AzureRepositories.Languages;
 using Lykke.Service.Resources.AzureRepositories.TextResources;
@@ -9,36 +11,24 @@ using Lykke.Service.Resources.Core.Domain.GroupResources;
 using Lykke.Service.Resources.Core.Domain.Languages;
 using Lykke.Service.Resources.Core.Domain.TextResources;
 using Lykke.Service.Resources.Core.Services;
-using Lykke.Service.Resources.Settings.ServiceSettings;
 using Lykke.Service.Resources.Services;
+using Lykke.Service.Resources.Settings;
 using Lykke.SettingsReader;
 
 namespace Lykke.Service.Resources.Modules
 {
+    [UsedImplicitly]
     public class ServiceModule : Module
     {
-        private readonly IReloadingManager<ResourcesSettings> _settings;
-        private readonly ILog _log;
+        private readonly IReloadingManager<AppSettings> _settings;
 
-        public ServiceModule(IReloadingManager<ResourcesSettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<AppSettings> settings)
         {
             _settings = settings;
-            _log = log;
         }
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(_log)
-                .As<ILog>()
-                .SingleInstance();
-            
-            builder.RegisterInstance(_settings.CurrentValue)
-                .SingleInstance();
-
-            builder.RegisterType<HealthService>()
-                .As<IHealthService>()
-                .SingleInstance();
-
             builder.RegisterType<StartupManager>()
                 .As<IStartupManager>()
                 .SingleInstance();
@@ -46,28 +36,32 @@ namespace Lykke.Service.Resources.Modules
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>()
                 .SingleInstance();
+            
+            builder.RegisterInstance(_settings.CurrentValue.ResourcesService)
+                .SingleInstance();
 
-            builder.RegisterInstance<ITextResourceRepository>(
+            builder.Register(ctx =>
                 new TextResourcesRepository(AzureTableStorage<TextResourceEntity>.Create(
-                    _settings.ConnectionString(x => x.Db.DataConnString), "TextResources", _log))
-            ).SingleInstance();
+                    _settings.ConnectionString(x => x.ResourcesService.Db.DataConnString), "TextResources", ctx.Resolve<ILogFactory>()))
+            ).As<ITextResourceRepository>().SingleInstance();
             
-            builder.RegisterInstance<ILanguagesRepository>(
+            builder.Register(ctx =>
                 new LanguagesRepository(AzureTableStorage<LanguageEntity>.Create(
-                    _settings.ConnectionString(x => x.Db.DataConnString), "ResourceLanguages", _log))
-            ).SingleInstance();
+                    _settings.ConnectionString(x => x.ResourcesService.Db.DataConnString), "ResourceLanguages", ctx.Resolve<ILogFactory>()))
+            ).As<ILanguagesRepository>().SingleInstance();
             
-            builder.RegisterInstance<IGroupResourceRepository>(
+            builder.Register(ctx =>
                 new GroupResourcesRepository(AzureTableStorage<GroupResourceEntity>.Create(
-                    _settings.ConnectionString(x => x.Db.DataConnString), "GroupResources", _log))
-            ).SingleInstance();
+                    _settings.ConnectionString(x => x.ResourcesService.Db.DataConnString), "GroupResources", ctx.Resolve<ILogFactory>()))
+            ).As<IGroupResourceRepository>().SingleInstance();
 
             builder.RegisterType<TextResourcesService>()
                 .As<ITextResourcesService>()
                 .SingleInstance();
 
             builder.RegisterInstance<IImageResourcesService>(
-                new ImageResourcesService(AzureBlobStorage.Create(_settings.ConnectionString(x => x.Db.DataConnString)), _settings.CurrentValue.ImagesContainer)
+                new ImageResourcesService(AzureBlobStorage.Create(_settings.ConnectionString(x => x.ResourcesService.Db.DataConnString)), 
+                    _settings.CurrentValue.ResourcesService.ImagesContainer)
             ).SingleInstance();
             
             builder.RegisterType<LanguagesService>()
